@@ -1,12 +1,29 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Movies = mongoose.model('Movies');
+var Movies = { "data" : {
+                        "1": {
+                            "_id": "1",
+                            "name": "Interstellar",
+                            "path": "films_interstellar.mp4",
+                            "rate": 5
+                        },
+                        "2": {
+                            "_id": "2",
+                            "name": "Interstellar",
+                            "path": "films_interstellar.mp4",
+                            "rate": 5
+                        },
+                        "3": {
+                            "_id": "3",
+                            "name": "Interstellar",
+                            "path": "films_interstellar.mp4",
+                            "rate": 5
+                        }
+                    },
+                "msg" : "",
+                "code"  : 200
+};
 
 exports.list_all_movies = function(req, res) {
-    Movies.find({}, function(err, task) {
-        if (err)
-            res.send(err);
-        res.json(task);
-    });
+    res.json(Movies);
 };
