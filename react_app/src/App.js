@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Fetch from 'react-fetch'
 import './App.css';
 
+const MoviesList = (props) => (
+    <ul>
+        <li>{props.name}</li>
+        <li>{props.rate}</li>
+        <li>{props.id}</li>
+    </ul>
+);
+
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {movies: []};
+    }
+    componentDidMount() {
+        fetch('http://localhost:3000/movies')
+
+            .then(
+                data => data.json()
+
+            )
+            .then((data) => {console.log("succes data: ",data);
+            this.setState({ movies: data }) });
+    }
+
+    // render() {
+    //     return <BookListing books={this.state.books} />;
+    // }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+       <MoviesList props={this.props} movies={this.state.movies} />
     );
   }
 }
